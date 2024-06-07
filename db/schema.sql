@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS cmsblog_db
+DROP DATABASE IF EXISTS cmsblog_db;
 CREATE DATABASE cmsblog_db;
