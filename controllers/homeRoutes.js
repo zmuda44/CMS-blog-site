@@ -4,7 +4,7 @@ const { User } = require('../models');
 
 
 router.get('/', (req, res) => {
-  res.send("hello")
+  res.render("homepage")
 })
 
 
