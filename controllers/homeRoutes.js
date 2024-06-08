@@ -3,8 +3,22 @@ const { User } = require('../models');
 // const withAuth = require('../utils/auth');
 
 
-router.get('/', (req, res) => {
-  res.send("hello")
+router.get('/', async (req, res) => {
+  try {
+    const postData = await Post.findAll();
+
+    const posts = postData.map((post) => project.get({ plain: true }));
+
+    res.render('homepage', {
+      posts
+    })
+    
+    
+  } catch (err) {
+    res.status(500).json(err);
+  }
+  
+  
 })
 
 
