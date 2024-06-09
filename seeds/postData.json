@@ -11,7 +11,7 @@
     },
     {
       "title": "Their First Post",
-      "description": "Their first post to seed data",
+      "content": "Their first post to seed data",
       "user_id": 2
     }
   ]
