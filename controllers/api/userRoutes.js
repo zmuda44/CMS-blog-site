@@ -4,8 +4,6 @@ const { User } = require('../../models');
 
 //post request that handles signup button login page and found in public/login.js.  request to /api/users
 router.post('/', async (req, res) => {
-  res.send(req.body)
-
   try {
     const userData = await User.create(req.body)
 
@@ -14,52 +12,105 @@ router.post('/', async (req, res) => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
 
-    //does the response have the req.session attached?
+    //does the response have the req.session attached? No, appears to be only the 3 data fields
     res.status(200).json(userData)
     })
   } catch (err) {
     res.status(400).json(err)
   }
-})
+});
 
 
 //post request that handles login button on login page and found in public/login.js. request to api/users/login
-// router.post('/login', async (req, res) => {
-//   try {
-//     const userData = await User.findOne({ where: { email: req.body.email } });
+//notice the check password to the beginning of user model
 
-//     if (!userData) {
-//       res
-//         .status(400)
-//         .json({ message: 'Incorrect email or password, please try again' });
-//       return;
-//     }
 
-//     const validPassword = await userData.checkPassword(req.body.password);
+router.post('/login', async (req, res) => {
+  // res.send(req.body.email)
 
-//     if (!validPassword) {
-//       res
-//         .status(400)
-//         .json({ message: 'Incorrect email or password, please try again' });
-//       return;
-//     }
+  try {
+    const userData = await User.findOne({ where: { email: req.body.email } })
+    
+    
 
-//     req.session.save(() => {
-//       req.session.user_id = userData.id;
-//       req.session.logged_in = true;
+    // if(!userData) {
+    //   // res.status(600).json({ message: "No user data found" });
+    //   console.log("no user DATA!!!!")
+    //   return;
+    // }
+
+    console.log(req.body.password)
+
+    const validPassword = await userData.checkPassword(req.body.password);
+
+    if (!validPassword) {
+      console.log("no valid password")
+      // res
+      //   .status(400)
+      //   .json({ message: 'Incorrect email or password, please try again' });
+      // return;
+    }
+
+    req.session.save(() => {
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
+
+      res.json({ user: userData, message: 'You are now logged in!' });
+    });
+
+
+    
+  }
+  catch (err) {
+    res.status(400).json("hello")
+  }
+  
+
+});
+
+
+
+
+
+
+module.exports = router;
+
+
+
+  //find entry where request body.email == to an email in the user db
+  // try {
+  //   const userData = await User.findOne({ where: { email: req.body.email } });
+
+  //   if (!userData) {
+  //     res
+  //       .status(400)
+  //       .json({ message: 'No user data found' });
+  //     return;
+  //   }
+
+    // const validPassword = await userData.checkPassword(req.body.password);
+
+    // if (!validPassword) {
+    //   res
+    //     .status(400)
+    //     .json({ message: 'Incorrect email or password, please try again' });
+    //   return;
+    // }
+
+  //   req.session.save(() => {
+  //     req.session.user_id = userData.id;
+  //     req.session.logged_in = true;
       
-//       res.json({ user: userData, message: 'You are now logged in!' });
-//     });
+  //     res.json({ user: userData, message: 'You are now logged in!' });
+  //   });
 
-//   } catch (err) {
-//     res.status(400).json(err);
-//   }
-// });
-
+  // } catch (err) {
+  //   res.status(400).json(err);
+  // }
 
 
 
-//haven't made this request yet
+  //haven't made this request yet
 
 // router.post('/logout', (req, res) => {
 //   if (req.session.logged_in) {
@@ -70,5 +121,3 @@ router.post('/', async (req, res) => {
 //     res.status(404).end();
 //   }
 // });
-
-module.exports = router;

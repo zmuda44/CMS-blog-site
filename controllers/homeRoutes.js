@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { User, Post } = require('../models');
-// const withAuth = require('../utils/auth');
+const withAuth = require('../utils/auth');
 
 
 // get request to homepage
@@ -52,24 +52,29 @@ router.get('/login', (req, res) => {
 //get request to profile page
 // router.get('/profile', withAuth, async (req, res) => {
 
+//NEEDED withAuth middleware for req.session.user_id to have value. otherwise undefined.
+//no you didn't.  what did you change?
+
 router.get('/profile', async (req, res) => {
   try {
 
     //find a user by the primary key which was set equal to req.session.user_id
     //include the database user
 
-    console.log(req.session.user_id)
+    // console.log(req.session.user_id)
 
     const userData = await User.findByPk(req.session.user_id);
     
     const user = userData.get({ plain: true });
 
-   console.log(userData)
+    // console.log(user)
 
-    res.render('profile')
+    res.render('profile', { user });
+
+    
   } catch (err) {
   res.status(500).json(err);
-}
+  }
 })
 
 
@@ -150,3 +155,29 @@ module.exports = router;
 // router.get('/profile', (req, res) => {
 //   res.render('profile')
 // })
+
+// router.get('/', async (req, res) => {
+//   try {
+//     // Get all projects and JOIN with user data
+//     const postData = await Post.findAll({
+//       // include: [
+//       //   {
+//       //     model: User,
+//       //     attributes: ['name'],
+//       //   },
+//       // ],
+      
+//     }); 
+  
+//     const posts = postData.map((post) => post.get({ plain: true }));  
+    
+//     // res.render('homepage', { 
+//     //   posts, 
+//     //   logged_in: req.session.logged_in 
+//     // });
+
+//     res.render('homepage', { posts })
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });

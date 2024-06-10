@@ -1,13 +1,16 @@
 const { Model, DataTypes } = require('sequelize');
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
-class blogUser extends Model {}
 
+//checkpassword is called in the post route to user/api/login on userRoutes.js
+//the hooks will run before any create or update (where are updates. craeate is in post request to /api/user )
 
-// checkPassword(loginPw) {
-//   return bcrypt.compareSync(loginPw, this.password);
-// }
+class blogUser extends Model {
+  checkPassword(loginPw) {
+    return bcrypt.compareSync(loginPw, this.password);
+  }
+}
 
 blogUser.init(
   {
@@ -38,6 +41,16 @@ blogUser.init(
     },
   },
   {
+    hooks: {
+      beforeCreate: async (newUserData) => {
+        newUserData.password = await bcrypt.hash(newUserData.password, 10);
+        return newUserData;
+      },
+      beforeUpdate: async (updatedUserData) => {
+        updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+        return updatedUserData;
+      },
+    },
     sequelize,
     timestamps: false,
     freezeTableName: true,
@@ -49,21 +62,4 @@ blogUser.init(
 module.exports = blogUser;
 
 
-//this object goes before sequelize all part of the object that sequelize is a part of. sequelize is the next object in that sequence
-// {
-//   hooks: {
-//     beforeCreate: async (newUserData) => {
-//       newUserData.password = await bcrypt.hash(newUserData.password, 10);
-//       return newUserData;
-//     },
-//     beforeUpdate: async (updatedUserData) => {
-//       updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
-//       return updatedUserData;
-//     },
-//   },
-//   sequelize,
-//   timestamps: false,
-//   freezeTableName: true,
-//   underscored: true,
-//   modelName: 'user',
-// }
+
