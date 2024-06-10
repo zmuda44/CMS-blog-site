@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const { User, Post } = require('../models');
-const withAuth = require('../utils/auth');
+// const withAuth = require('../utils/auth');
 
+
+// get request to homepage
 router.get('/', async (req, res) => {
     try {
       // Get all projects and JOIN with user data
@@ -28,6 +30,13 @@ router.get('/', async (req, res) => {
     }
   });
 
+
+  //missing get request to post/:id
+
+
+
+//get requst to login page
+//login needs if req.session.logged_in
 router.get('/login', (req, res) => {
 
   // if (req.session.logged_in) {
@@ -39,25 +48,32 @@ router.get('/login', (req, res) => {
 });
 
 
+
+//get request to profile page
 // router.get('/profile', withAuth, async (req, res) => {
 
 router.get('/profile', async (req, res) => {
   try {
 
-    const userPostsData = await User.findByPk(req.id);
-    
-    const userPosts = userPostsData.map((post) => post.get({ plan: true }))
+    //find a user by the primary key which was set equal to req.session.user_id
+    //include the database user
 
-    
+    console.log(req.session.user_id)
 
-    res.render('profile', { userPosts });
-  }catch (err) {
+    const userData = await User.findByPk(req.session.user_id);
+    
+    const user = userData.get({ plain: true });
+
+   console.log(userData)
+
+    res.render('profile')
+  } catch (err) {
   res.status(500).json(err);
 }
 })
 
 
-
+module.exports = router;
 
 // router.get('/profile', withAuth, async (req, res) => {
 
@@ -112,7 +128,7 @@ router.get('/profile', async (req, res) => {
 //   });
 
 
-  module.exports = router;
+
 
 
 
