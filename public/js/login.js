@@ -1,4 +1,4 @@
-//2 fucntions in this file. 1 for handling the new signup and one for handling the logged in signup
+
 
 
 
