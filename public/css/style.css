@@ -1,0 +1,110 @@
+
+.container {
+    max-width: 1500px;
+    margin: auto
+}
+
+
+/* Begin header section */
+
+header {
+    background-color: black;
+}
+
+header a {
+    color: white;
+    margin-right: 10px;
+}
+
+/* Title Box right below header */
+
+.title-box {
+    background-color: black;
+    height: 50px;
+    padding: 20px 0;
+} 
+    
+.title-box .container {
+    display: flex;
+    align-items: center;
+}
+
+.title-box .box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 50px;   
+    background-color: green;
+    border-radius: 10px;
+}
+
+/* Begin homepage cards */
+
+.all-posts {
+    margin-top: 20px;
+}
+
+.card {
+    border: solid;
+    margin: 10px 0;    
+}
+
+.card .title {
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.card .content {
+    margin: 0 10px;
+}
+
+/* Begin Login Screen */
+
+.login-section .container {
+    border: solid;
+    margin-top: 10px;    
+}
+
+.login-section h2 {
+    background-color: black;
+    color: white;
+    padding-left: 10px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding-left: 20px;
+}
+
+.form-group button {
+    height: 40px;
+}
+
+.signup-link {
+    padding-left: 10px;
+}
+
+/* Begin Signup section */
+
+.signup-section .container {
+    border: solid;
+    margin-top: 10px;    
+}
+
+.signup-section h2 {
+    background-color: black;
+    color: white;
+    padding-left: 10px;
+}
+
+
+
+
+

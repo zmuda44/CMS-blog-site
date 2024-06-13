@@ -3,20 +3,24 @@ const { Post } = require('../../models');
 
 //creates new project from form _____
 
+//main question.  where do all of the res.status(200).json's go???
 
 
-// router.post('/', withAuth, async (req, res) => {
-//     try {
-//       const newProject = await Project.create({
-//         ...req.body,
-//         user_id: req.session.user_id,
-//       });
+//there was a withAuth here on this i believe
+router.post('/', async (req, res) => {
+    console.log(req.body)
+    try {
+      const newPost = await Post.create(req.body)
+
+      console.log(newPost)
   
-//       res.status(200).json(newProject);
-//     } catch (err) {
-//       res.status(400).json(err);
-//     }
-//   });
+      res.status(200).json(newPost);
+    } catch (err) {
+      res.status(400).json(err);
+    }
+});
+
+module.exports = router;
 
 
 
