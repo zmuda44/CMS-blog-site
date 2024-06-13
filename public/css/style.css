@@ -104,6 +104,25 @@ header a {
     padding-left: 10px;
 }
 
+/* Begin Dashboard section */
+
+.container .space-holder {
+    display: block;
+    height: 400px;
+    width: 100%;
+    /* background-color: red; */
+}
+
+.post-form {
+    display: none;
+}
+
+.new-post-show {
+    background-color: black;
+    color: white;
+    padding: 5px;
+    margin: auto;
+}
 
 
 

@@ -1,10 +1,13 @@
-//The logic for handling the form and delete buttons go here. nothing else
+function showForm () {
+  postForm.style.display = "block";
+  document.querySelector('.space-holder').style.display = "none"
+}
 
 async function newPost (e) {
     e.preventDefault();
     
-    const title = document.getElementById("post-title").value.trim();
-    const content = document.getElementById("post-content").value.trim();
+    const title = document.getElementById("title").value.trim();
+    const content = document.getElementById("content").value.trim();
     const user_id = 1;
 
     if (title && content && user_id) {
@@ -17,7 +20,7 @@ async function newPost (e) {
     
         if (response.ok) {
           // If successful, redirect the browser to the profile page
-          document.location.replace('/profile');
+          document.location.replace('/dashboard');
         } else {
           alert(response.statusText);
         }
@@ -32,8 +35,7 @@ async function newPost (e) {
 
 
 
-document.querySelector('.post-form-section').addEventListener('submit', newPost);
+const postForm = document.querySelector('.post-form')
+postForm.addEventListener('submit', newPost);
 
-// document
-//   .querySelector('.project-list')
-//   .addEventListener('click', delButtonHandler);
+document.querySelector('.new-post-show').addEventListener('click', showForm)

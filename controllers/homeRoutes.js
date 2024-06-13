@@ -55,23 +55,8 @@ router.get('/login', (req, res) => {
 router.get('/dashboard', async (req, res) => {
   try {
 
-    //find a user by the primary key which was set equal to req.session.user_id
-    //include the database user
 
-    
-
-    const userData = await User.findByPk(1, {
-      include: [{ model: Post }],
-    });
-
-    //posts show up on user object as posts: [{post data goes in here}, {etc}]    
-    const user = userData.get({ plain: true });
-
-    console.log(user)
-
-
-    // { user }, {user}, ...user all didn't work
-    res.render('dashboard', user);
+    res.render('dashboard');
 
     
   } catch (err) {
