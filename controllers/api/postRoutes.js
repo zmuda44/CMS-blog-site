@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const { Post } = require('../../models');
 
-//creates new project from form _____
-
 //main question.  where do all of the res.status(200).json's go???
 
 
