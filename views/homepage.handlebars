@@ -11,7 +11,7 @@
   {{#if posts.length}}
 
   {{#each posts as |post| }}
-  <div class="card">
+  <div class="card" id="{{post.id}}">
     <div class="title">
       <h2> {{post.title}} </h2>
       <p> Posted by {{ blog_user.name }} on {{ date }} </p>
@@ -19,12 +19,18 @@
     <div class="content">
       <p> {{post.content}} </p>
     </div>
+    <div class="comment-box" value="{{post.id}}">
+      <label for="comment-text">Comment</label>
+      <input type="text" class="" id="comment-text">
+    </div>
   </div>
   {{/each}}
 
   {{/if}}
   </div>
 </div>
+
+<script src="./js/homepage.js"></script>
 
 
 
