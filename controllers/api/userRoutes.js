@@ -4,6 +4,8 @@ const { User } = require('../../models');
 
 //post request that handles signup button login page and found in public/login.js.  request to /api/users
 router.post('/', async (req, res) => {
+  console.log(req.body)
+ 
   try {
     const userData = await User.create(req.body)
 
@@ -26,10 +28,10 @@ router.post('/', async (req, res) => {
 
 
 router.post('/login', async (req, res) => {
-  // res.send(req.body.email)
+  console.log(req.body.username)
 
   try {
-    const userData = await User.findOne({ where: { email: req.body.email } })
+    const userData = await User.findOne({ where: { email: req.body.username } })
     
     
 
@@ -43,12 +45,13 @@ router.post('/login', async (req, res) => {
 
     const validPassword = await userData.checkPassword(req.body.password);
 
+      //NOTE FOR TOMRROW.  HOW TO DO DIFFERENT ALERTS FOR DIFFERENT ERRORS. USERNAME TAKEN OR INVALID PASSWORD (STE THESE IN MODELS)
     if (!validPassword) {
       console.log("no valid password")
-      // res
-      //   .status(400)
-      //   .json({ message: 'Incorrect email or password, please try again' });
-      // return;
+      res
+        .status(400)
+        .json({ message: 'Incorrect email or password, please try again' });
+      return;
     }
 
     req.session.save(() => {

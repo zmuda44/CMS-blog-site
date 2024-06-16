@@ -8,18 +8,18 @@ const loginFormPost = async (event) => {
   event.preventDefault();
 
   // Collect values from the login form
-  const email = document.getElementById('email-login').value.trim();
+  const username = document.getElementById('username-login').value.trim();
   const password = document.getElementById('password-login').value.trim();
 
   // console.log(email)
   // console.log(password)
 
   
-  if (email && password) {
+  if (username && password) {
     // console.log('has both!!!')
     const response = await fetch('/api/users/login', {
       method: 'POST',
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ username, password }),
       headers: { 'Content-Type': 'application/json' },
     });
 

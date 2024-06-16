@@ -13,8 +13,7 @@ router.get('/', async (req, res) => {
             model: User,
             attributes: ['name'],
           },
-        ],
-        
+        ],        
       }); 
     
       const posts = postData.map((post) => post.get({ plain: true }));  
@@ -54,6 +53,7 @@ router.get('/login', (req, res) => {
 
 router.get('/dashboard', async (req, res) => {
   try {
+    const postData = await Post.findByPk
 
 
     res.render('dashboard');
