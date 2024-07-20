@@ -9,14 +9,14 @@ router.post('/', async (req, res) => {
   try {
     const userData = await User.create(req.body)
 
-    req.session.save(() => {
-      //the data coming back out of the server will have a user id. set it equal to req.session.user_id)
-      req.session.user_id = userData.id;
-      req.session.logged_in = true;
+    // req.session.save(() => {
+    //   //the data coming back out of the server will have a user id. set it equal to req.session.user_id)
+    //   req.session.user_id = userData.id;
+    //   req.session.logged_in = true;
 
-    //does the response have the req.session attached? No, appears to be only the 3 data fields
-    res.status(200).json(userData)
-    })
+    // //does the response have the req.session attached? No, appears to be only the 3 data fields
+    // res.status(200).json(userData)
+    // })
   } catch (err) {
     res.status(400).json(err)
   }
