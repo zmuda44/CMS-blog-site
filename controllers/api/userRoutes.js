@@ -4,7 +4,7 @@ const { User } = require('../../models');
 
 //post request that handles signup button login page and found in public/login.js.  request to /api/users
 router.post('/', async (req, res) => {
-  console.log(req.body)
+
  
   try {
     const userData = await User.create(req.body)
@@ -17,6 +17,7 @@ router.post('/', async (req, res) => {
     // //does the response have the req.session attached? No, appears to be only the 3 data fields
     // res.status(200).json(userData)
     // })
+    res.send(userData)
   } catch (err) {
     res.status(400).json(err)
   }
