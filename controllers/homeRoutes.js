@@ -13,14 +13,18 @@ router.get('/', async (req, res) => {
             model: User,
             attributes: ['username'],
           },
+          {
+            model: Comment,
+            attributes: ['content']
+          }
         ],        
       });
       
- 
+//  console.log(postData)
     
       const posts = postData.map((post) => post.get({ plain: true }));  
 
-    console.log(posts)
+    // console.log(posts)
 
       res.render('homepage', { posts })
       

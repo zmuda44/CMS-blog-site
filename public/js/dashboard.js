@@ -8,7 +8,7 @@ async function newPost (e) {
     
     const title = document.getElementById("title").value.trim();
     const content = document.getElementById("content").value.trim();
-    const user_id = 1;
+    const user_id = 8;
 
     if (title && content && user_id) {
         // console.log('has both!!!')

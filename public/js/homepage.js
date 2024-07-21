@@ -1,22 +1,21 @@
 const cardsEl = document.getElementsByClassName('card')
-const commentBoxEl = document.getElementsByClassName('.comment-box')
-const commentContentEl = document.getElementById('comment-text')
-const commentBtnEl = document.getElementById('comment-btn')
+// const commentBoxEl = document.getElementsByClassName('.comment-box')
+// const commentContentEl = document.getElementsByClassName('comment-text')
+const commentBtnEl = document.getElementsByClassName('comment-btn')
 
 function displayCommentBox () {
-    console.log(this)
+  console.log()
     const commentBoxEl = this.querySelector('.comment-box')
     commentBoxEl.style.display = "block"    
 }
 
-const submitComment = async () => {
-    const content = commentContentEl.value.trim()
+const submitComment = async (content, post_id) => {
 
-    if (content) {
+    if (content && post_id) {
         // console.log('has both!!!')
         const response = await fetch('/api/posts/comment', {
           method: 'POST',
-          body: JSON.stringify({ content }),
+          body: JSON.stringify({ content, post_id }),
           // body: JSON.stringify({ commentText, req.session.id }),
           headers: { 'Content-Type': 'application/json' },
         });
@@ -68,4 +67,12 @@ for (card of cardsEl) {
 card.addEventListener('click', displayCommentBox)
 }
 
-commentBtnEl.addEventListener('click', submitComment)
+for (btn of commentBtnEl) {
+  btn.addEventListener('click', (e) => {
+    const postId = e.target.getAttribute('data-post-id')
+    const commentContent = document.getElementById("comment-input-post"+postId).value.trim()
+    submitComment(commentContent, postId)
+  })
+}
+
+
