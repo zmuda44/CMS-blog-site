@@ -15,7 +15,8 @@ const SubmitComment = async () => {
         // console.log('has both!!!')
         const response = await fetch('/api/posts/comment', {
           method: 'POST',
-          body: JSON.stringify({ commentText, req.session.id }),
+          body: JSON.stringify(commentText),
+          // body: JSON.stringify({ commentText, req.session.id }),
           headers: { 'Content-Type': 'application/json' },
         });
     

@@ -8,19 +8,21 @@ router.get('/', async (req, res) => {
     try {
       // Get all projects and JOIN with user data
       const postData = await Post.findAll({
-        // include: [
-        //   {
-        //     model: User,
-        //     attributes: ['user_id'],
-        //   },
-        // ],        
-      }); 
+        include: [
+          {
+            model: User,
+            attributes: ['username'],
+          },
+        ],        
+      });
+      
+ 
     
       const posts = postData.map((post) => post.get({ plain: true }));  
 
-      console.log("say something")
+    console.log(posts)
 
-      res.render('homepage', posts)
+      res.render('homepage', { posts })
       
       // res.render('homepage', { posts, logged_in: req.session.logged_in })
     } catch (err) {
