@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { Post } = require('../../models');
+const { Post, Comment } = require('../../models');
+
 
 //main question.  where do all of the res.status(200).json's go???
 
@@ -8,15 +9,24 @@ const { Post } = require('../../models');
 router.post('/', async (req, res) => {
     console.log(req.body)
     try {
-      const newPost = await Post.create(req.body)
-
-      console.log(newPost)
-  
+      const newPost = await Post.create(req.body)  
       res.status(200).json(newPost);
     } catch (err) {
       res.status(400).json(err);
     }
 });
+
+router.post('/comment', async (req, res) => {
+
+  try {
+    const newComment = await Comment.create(req.body)
+    console.log(newComment)
+  }
+  catch(err) {
+    console.log(err)
+  }
+}
+)
 
 module.exports = router;
 

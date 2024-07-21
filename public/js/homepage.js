@@ -1,6 +1,7 @@
 const cardsEl = document.getElementsByClassName('card')
 const commentBoxEl = document.getElementsByClassName('.comment-box')
-const commentTextEl = document.getElementById('comment-text')
+const commentContentEl = document.getElementById('comment-text')
+const commentBtnEl = document.getElementById('comment-btn')
 
 function displayCommentBox () {
     console.log(this)
@@ -8,14 +9,14 @@ function displayCommentBox () {
     commentBoxEl.style.display = "block"    
 }
 
-const SubmitComment = async () => {
-    const commentText = commentTextEl.value.trim()
+const submitComment = async () => {
+    const content = commentContentEl.value.trim()
 
-    if (commentText) {
+    if (content) {
         // console.log('has both!!!')
         const response = await fetch('/api/posts/comment', {
           method: 'POST',
-          body: JSON.stringify(commentText),
+          body: JSON.stringify({ content }),
           // body: JSON.stringify({ commentText, req.session.id }),
           headers: { 'Content-Type': 'application/json' },
         });
@@ -61,6 +62,10 @@ const loginFormPost = async (event) => {
 
 
 
+
+
 for (card of cardsEl) {
 card.addEventListener('click', displayCommentBox)
 }
+
+commentBtnEl.addEventListener('click', submitComment)
