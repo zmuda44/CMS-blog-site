@@ -19,12 +19,8 @@ router.get('/', async (req, res) => {
           }
         ],        
       });
-      
-//  console.log(postData)
     
       const posts = postData.map((post) => post.get({ plain: true }));  
-
-    // console.log(posts)
 
       res.render('homepage', { posts })
       
@@ -63,10 +59,10 @@ router.get('/login', (req, res) => {
 
 router.get('/dashboard', async (req, res) => {
   try {
-    const postData = await Post.findByPk
+    const postData = await Post.findAll()
+    const posts = postData.map((post) => post.get({ plain: true }));  
 
-
-    res.render('dashboard');
+    res.render('dashboard', { posts })
 
     
   } catch (err) {

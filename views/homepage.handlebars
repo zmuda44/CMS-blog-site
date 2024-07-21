@@ -22,11 +22,12 @@
       <p> {{post.content}} </p>
     </div>
     <div class="comment-box" data-post-id="{{post.id}}">
-      {{#if comments.length && comments.post_id == post.id }}
+      {{!-- {{#each comments as |comment|}}
+      {{ifEqual comment.post_id post.id}}
       <p>put something here</p>
       <p>{{comment.content}}</p>
       <p>{{comment.user_id}}</p>
-      {{/if}}
+      {{/if}} --}}
       <label for="comment-text-{{post.id}}">Comment</label>
       <input type="text" class="comment-content" id="comment-input-post{{post.id}}">
       <button class="comment-btn" data-post-id="{{post.id}}">submit</button>

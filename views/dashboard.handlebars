@@ -22,6 +22,10 @@
   <div class="container">
     {{!-- Space holder to take up space that form will occupy. Do not want to use opacity 0 on form to ensure no functionality --}}
     <div class="space-holder"></div>
+    {{#each posts as |post|}}
+    <p>{{post.title}}</p>
+
+    {{/each}}
     
     {{!-- Hidden until button click --}}
     <form class="post-form">
