@@ -18,9 +18,10 @@ router.get('/', async (req, res) => {
             attributes: ['content']
           }
         ],        
-      });
+      });      
     
       const posts = postData.map((post) => post.get({ plain: true }));  
+      // res.send(posts)
 
       res.render('homepage', { posts })
       
@@ -59,11 +60,17 @@ router.get('/login', (req, res) => {
 
 router.get('/dashboard', async (req, res) => {
   try {
-    const postData = await Post.findAll()
-    const posts = postData.map((post) => post.get({ plain: true }));  
+    const userData = await User.findByPk(5, {
+      include: [{ model: Post }],
+    });
+    // const userPosts = postData.map((post) => post.get({ plain: true }));  
+    
 
-    res.render('dashboard', { posts })
+    const userPostsData = userData.dataValues.posts
 
+    const userPosts = userPostsData.map((post) => post.get({ plain: true }));
+
+    res.render('dashboard', { userPosts })
     
   } catch (err) {
   res.status(500).json(err);
