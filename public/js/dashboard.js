@@ -1,3 +1,18 @@
+const userPostEl = document.getElementsByClassName('user-posts')
+
+// const updatePostForm = document.getElementsByClassName('.update-post-form')
+const postForm = document.querySelector('.post-form')
+
+
+function showUpdateForm() {
+  
+    const postUpdateFormEl = this.querySelector('.update-post-form')
+    postUpdateFormEl.style.display = "block";
+    console.log(postUpdateFormEl)
+    document.querySelector('.space-holder').style.display = "none"
+}
+
+
 function showForm () {
   postForm.style.display = "block";
   document.querySelector('.space-holder').style.display = "none"
@@ -28,14 +43,11 @@ async function newPost (e) {
 };
 
 
-
-
-
-
-
-
-
-const postForm = document.querySelector('.post-form')
 postForm.addEventListener('submit', newPost);
 
-document.querySelector('.new-post-show').addEventListener('click', showForm)
+for (post of userPostEl) {
+  post.addEventListener('click', showUpdateForm)
+}
+
+document.querySelector('.new-post-btn').addEventListener('click', showForm)
+// document.querySelector('.update-post-form').addEventListener('click', showUpdateForm)

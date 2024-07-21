@@ -16,15 +16,24 @@
 {{/if}}
 
 
-
+{{!-- Posts --}}
 
 <div class="new-post-section">
   <div class="container">
     {{!-- Space holder to take up space that form will occupy. Do not want to use opacity 0 on form to ensure no functionality --}}
     <div class="space-holder"></div>
-    {{#each userPosts as |userPost|}}
-    <p>{{userPost.title}}</p>
 
+    {{#each userPosts as |userPost|}}
+    <div class="user-posts">
+      <p class="user-post" style="background-color: red">{{userPost.title}}</p>
+      <div class="update-post-form" id="update-post-form">
+        <label for="post-text-{{post.id}}">Edit Post</label>
+        <input type="text" class="update-post-content" id="update-post-input{{post.id}}">
+        <button class="update-post-btn" data-post-id="{{post.id}}">Update</button>
+        <button class="delete-post-btn" data-post-id="{{post.id}}">Delete</button>
+
+      </div>
+    </div>
     {{/each}}
     
     {{!-- Hidden until button click --}}
@@ -42,7 +51,7 @@
         <button class="" type="submit">Create</button>
       </div>
     </form>
-    <button class="new-post-show">New Post</button>
+    <button class="new-post-btn">New Post</button>
   </div>
 </div>
 

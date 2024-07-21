@@ -60,7 +60,7 @@ router.get('/login', (req, res) => {
 
 router.get('/dashboard', async (req, res) => {
   try {
-    const userData = await User.findByPk(5, {
+    const userData = await User.findByPk(8, {
       include: [{ model: Post }],
     });
     // const userPosts = postData.map((post) => post.get({ plain: true }));  
