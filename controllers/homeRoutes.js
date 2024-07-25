@@ -5,6 +5,7 @@ const withAuth = require('../utils/auth');
 
 // get request to homepage
 router.get('/', async (req, res) => {
+  let loggedIn = req.session.logged_in
     try {
       // Get all projects and JOIN with user data
       const postData = await Post.findAll({
@@ -19,17 +20,17 @@ router.get('/', async (req, res) => {
           }
         ],        
       });  
-      console.log(postData.blog_user)    
-    
+     
+    console.log(loggedIn)
       const posts = postData.map((post) => post.get({ plain: true }));  
-      posts.forEach((post) => {
-        console.log(post.comments)
-      })
+      // posts.forEach((post) => {
+      //   console.log(post.comments)
+      // })
       
       
       // res.send(posts)
 
-      res.render('homepage', { posts })
+      res.render('homepage', { posts, logged_in: req.session.logged_in })
       
       // res.render('homepage', { posts, logged_in: req.session.logged_in })
     } catch (err) {
@@ -56,6 +57,16 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+router.post('/logout', (req, res) => {
+  if (req.session.logged_in) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
+  }
+});
+
 
 
 //get request to profile page
@@ -64,13 +75,23 @@ router.get('/login', (req, res) => {
 //NEEDED withAuth middleware for req.session.user_id to have value. otherwise undefined.
 //no you didn't.  what did you change?
 
-router.get('/dashboard', async (req, res) => {
-  try {
-    const userData = await User.findByPk(8, {
-      include: [{ model: Post }],
-    });
     // const userPosts = postData.map((post) => post.get({ plain: true }));  
     
+    // const userData = await User.findByPk(req.session.user_id, {
+    //   //       attributes: { exclude: ['password'] },
+    //   //       include: [{ model: Post }],
+    //   //     });
+
+router.get('/dashboard', withAuth, async (req, res) => {
+ 
+  try {
+    const userData = await User.findByPk(req.session.user_id, {
+      include: [{ model: Post }],
+      attributes: { exclude: ['password'] },
+    });
+
+
+    console.log(userData)
 
     const userPostsData = userData.dataValues.posts
 

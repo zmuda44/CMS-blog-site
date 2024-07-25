@@ -5,7 +5,7 @@ const commentBtnEl = document.getElementsByClassName('comment-btn')
 
 function displayCommentBox () {
   console.log()
-    const commentBoxEl = this.querySelector('.comment-box')
+    const commentBoxEl = this.querySelector('.comments')
     commentBoxEl.style.display = "block"    
 }
 
