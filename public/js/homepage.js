@@ -27,7 +27,10 @@ const submitComment = async (content, post_id) => {
           alert(response.statusText);
         }
     }
+}
 
+const editPost = async (content, post_id) => {
+  
 }
 
 const loginFormPost = async (event) => {

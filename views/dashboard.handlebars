@@ -24,14 +24,16 @@
     <div class="space-holder"></div>
 
     {{#each userPosts as |userPost|}}
-    <div class="user-posts">
-      <p class="user-post" style="background-color: red">{{userPost.title}}</p>
+    <div class="user-posts" id="{{userPost.id}}">      
+      <p class="user-post-title" style="background-color: red">{{userPost.title}}</p>
+      <p class="user-post-content" style="background-color: red">{{userPost.content}}</p>
       <div class="update-post-form" id="update-post-form">
-        <label for="post-text-{{post.id}}">Edit Post</label>
-        <input type="text" class="update-post-content" id="update-post-input{{post.id}}">
+        <label for="post-text-{{post.id}}">Title</label>
+        <input type="text" class="update-post-title" id="update-post-title{{post.id}}">
+        <label for="post-text-{{post.id}}">Content</label>
+        <input type="text" class="update-post-content" id="update-post-content{{post.id}}">
         <button class="update-post-btn" data-post-id="{{post.id}}">Update</button>
         <button class="delete-post-btn" data-post-id="{{post.id}}">Delete</button>
-
       </div>
     </div>
     {{/each}}

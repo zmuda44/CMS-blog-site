@@ -18,9 +18,15 @@ router.get('/', async (req, res) => {
             attributes: ['content']
           }
         ],        
-      });      
+      });  
+      console.log(postData.blog_user)    
     
       const posts = postData.map((post) => post.get({ plain: true }));  
+      posts.forEach((post) => {
+        console.log(post.comments)
+      })
+      
+      
       // res.send(posts)
 
       res.render('homepage', { posts })

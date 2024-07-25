@@ -21,7 +21,14 @@
     <div class="content">
       <p> {{post.content}} </p>
     </div>
-    <div class="comment-box" data-post-id="{{post.id}}">
+    <div class="comments">
+      <div class="previous-comments">
+        <h3 class="comments-title">Comments</h3>
+        {{#each comments as |comment|}}
+        <p class="previous-comment">{{comment.content}}</p>
+        {{/each}}
+      </div>
+      <div class="comment-box" data-post-id="{{post.id}}">
       {{!-- {{#each comments as |comment|}}
       {{ifEqual comment.post_id post.id}}
       <p>put something here</p>
@@ -32,6 +39,12 @@
       <input type="text" class="comment-content" id="comment-input-post{{post.id}}">
       <button class="comment-btn" data-post-id="{{post.id}}">submit</button>
     </div>
+
+
+
+
+    </div>
+    
   </div>
   {{/each}}
 

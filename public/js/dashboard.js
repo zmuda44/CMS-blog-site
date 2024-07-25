@@ -46,7 +46,11 @@ async function newPost (e) {
 postForm.addEventListener('submit', newPost);
 
 for (post of userPostEl) {
+  // const postID = post.id
+  console.log(postId)
   post.addEventListener('click', showUpdateForm)
+
+  // const postUpdateForm = post.getElementById('')
 }
 
 document.querySelector('.new-post-btn').addEventListener('click', showForm)
