@@ -5,7 +5,7 @@ const withAuth = require('../utils/auth');
 
 // get request to homepage
 router.get('/', async (req, res) => {
-  let loggedIn = req.session.logged_in
+  // let loggedIn = req.session.logged_in
     try {
       // Get all projects and JOIN with user data
       const postData = await Post.findAll({
@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
         ],        
       });  
      
-    console.log(loggedIn)
+
       const posts = postData.map((post) => post.get({ plain: true }));  
       // posts.forEach((post) => {
       //   console.log(post.comments)
@@ -97,7 +97,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
     const userPosts = userPostsData.map((post) => post.get({ plain: true }));
 
-    res.render('dashboard', { userPosts })
+    res.render('dashboard', { userPosts, logged_in: req.session.logged_in })
     
   } catch (err) {
   res.status(500).json(err);
