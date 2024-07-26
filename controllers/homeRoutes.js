@@ -5,7 +5,7 @@ const withAuth = require('../utils/auth');
 
 // get request to homepage
 router.get('/', async (req, res) => {
-  // let loggedIn = req.session.logged_in
+
     try {
       // Get all projects and JOIN with user data
       const postData = await Post.findAll({
@@ -16,11 +16,16 @@ router.get('/', async (req, res) => {
           },
           {
             model: Comment,
-            attributes: ['content']
+            attributes: ['content', 'user_id']
           }
         ],        
       });  
+
+      const userData = await User.findByPk(req.session.user_id, {
+        attributes: { exclude: ['password'] }
+      })
      
+      const user = userData.get({ plain: true });
 
       const posts = postData.map((post) => post.get({ plain: true }));  
       // posts.forEach((post) => {
@@ -30,7 +35,9 @@ router.get('/', async (req, res) => {
       
       // res.send(posts)
 
-      res.render('homepage', { posts, logged_in: req.session.logged_in })
+
+
+      res.render('homepage', { posts, logged_in: req.session.logged_in, user })
       
       // res.render('homepage', { posts, logged_in: req.session.logged_in })
     } catch (err) {

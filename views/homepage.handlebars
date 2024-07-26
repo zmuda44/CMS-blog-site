@@ -5,7 +5,7 @@
     <div class="box">The Tech Blog</div>
   </div>
 </div>
-
+<p id="user-welcome" data-user-id="{{user.id}}">{{user.username}}</p>
 <div class="all-posts">
   <div class="container">
   {{#if posts.length}}
@@ -26,6 +26,7 @@
         <h3 class="comments-title">Comments</h3>
         {{#each comments as |comment|}}
         <p class="previous-comment">{{comment.content}}</p>
+        <p class="user-comment">-{{comment.user_id}}</p>
         {{/each}}
       </div>
       <div class="comment-box" data-post-id="{{post.id}}">

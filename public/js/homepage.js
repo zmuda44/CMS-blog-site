@@ -9,13 +9,14 @@ function displayCommentBox () {
     commentBoxEl.style.display = "block"    
 }
 
-const submitComment = async (content, post_id) => {
+const submitComment = async (content, post_id, user_id) => {
+  console.log(user_id)
 
     if (content && post_id) {
-        // console.log('has both!!!')
+
         const response = await fetch('/api/posts/comment', {
           method: 'POST',
-          body: JSON.stringify({ content, post_id }),
+          body: JSON.stringify({ content, post_id, user_id }),
           // body: JSON.stringify({ commentText, req.session.id }),
           headers: { 'Content-Type': 'application/json' },
         });
@@ -39,6 +40,7 @@ const loginFormPost = async (event) => {
     // Collect values from the login form
     const username = document.getElementById('username-login').value.trim();
     const password = document.getElementById('password-login').value.trim();
+    
   
     // console.log(email)
     // console.log(password)
@@ -74,7 +76,8 @@ for (btn of commentBtnEl) {
   btn.addEventListener('click', (e) => {
     const postId = e.target.getAttribute('data-post-id')
     const commentContent = document.getElementById("comment-input-post"+postId).value.trim()
-    submitComment(commentContent, postId)
+    const userId = document.getElementById('user-welcome').getAttribute('data-user-id')
+    submitComment(commentContent, postId, userId)
   })
 }
 
