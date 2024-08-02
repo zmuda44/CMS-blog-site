@@ -38,15 +38,6 @@ router.post('/login', async (req, res) => {
       console.log("no user DATA!!!!")
     }
 
-    // const checkPassword = () => {
-    //   if (userData.dataValues.password === req.body.password) {
-    //   return true
-    //   }
-    //   return false
-    // }
-
-    // const validPassword = checkPassword()
-
     const validPassword = await userData.checkPassword(req.body.password);
 
       //NOTE FOR TOMRROW.  HOW TO DO DIFFERENT ALERTS FOR DIFFERENT ERRORS. USERNAME TAKEN OR INVALID PASSWORD (STE THESE IN MODELS)
@@ -64,8 +55,6 @@ router.post('/login', async (req, res) => {
 
       res.status(200).json(userData);
     });
-
-
     
   }
   catch (err) {
@@ -86,44 +75,11 @@ router.post('/logout', (req, res) => {
 });
 
 
-
-
-
-
 module.exports = router;
 
 
 
-  //find entry where request body.email == to an email in the user db
-  // try {
-  //   const userData = await User.findOne({ where: { email: req.body.email } });
 
-  //   if (!userData) {
-  //     res
-  //       .status(400)
-  //       .json({ message: 'No user data found' });
-  //     return;
-  //   }
-
-    // const validPassword = await userData.checkPassword(req.body.password);
-
-    // if (!validPassword) {
-    //   res
-    //     .status(400)
-    //     .json({ message: 'Incorrect email or password, please try again' });
-    //   return;
-    // }
-
-  //   req.session.save(() => {
-  //     req.session.user_id = userData.id;
-  //     req.session.logged_in = true;
-      
-  //     res.json({ user: userData, message: 'You are now logged in!' });
-  //   });
-
-  // } catch (err) {
-  //   res.status(400).json(err);
-  // }
 
 
 
