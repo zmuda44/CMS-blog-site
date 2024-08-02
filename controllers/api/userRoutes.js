@@ -38,16 +38,16 @@ router.post('/login', async (req, res) => {
       console.log("no user DATA!!!!")
     }
 
-    const checkPassword = () => {
-      if (userData.dataValues.password === req.body.password) {
-      return true
-      }
-      return false
-    }
+    // const checkPassword = () => {
+    //   if (userData.dataValues.password === req.body.password) {
+    //   return true
+    //   }
+    //   return false
+    // }
 
-    const validPassword = checkPassword()
+    // const validPassword = checkPassword()
 
-    // const validPassword = await userData.checkPassword(req.body.password);
+    const validPassword = await userData.checkPassword(req.body.password);
 
       //NOTE FOR TOMRROW.  HOW TO DO DIFFERENT ALERTS FOR DIFFERENT ERRORS. USERNAME TAKEN OR INVALID PASSWORD (STE THESE IN MODELS)
     if (!validPassword) {
