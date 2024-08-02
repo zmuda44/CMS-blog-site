@@ -26,7 +26,7 @@
     {{#each userPosts as |userPost|}}
     <div class="user-posts" id="{{userPost.id}}">      
       <p class="user-post-title" style="background-color: red">{{userPost.title}}</p>
-      <p class="user-post-content" style="background-color: red">{{userPost.content}}</p>
+      {{!-- <p class="user-post-content" style="background-color: red">{{userPost.content}}</p> --}}
       <div class="update-post-form" id="update-post-form">
         <label for="post-text-{{userPost.id}}">Title</label>
         <input type="text" class="update-post-title" id="update-post-title{{post.id}}">
