@@ -76,18 +76,7 @@ router.post('/logout', (req, res) => {
 
 
 
-//get request to profile page
-// router.get('/profile', withAuth, async (req, res) => {
 
-//NEEDED withAuth middleware for req.session.user_id to have value. otherwise undefined.
-//no you didn't.  what did you change?
-
-    // const userPosts = postData.map((post) => post.get({ plain: true }));  
-    
-    // const userData = await User.findByPk(req.session.user_id, {
-    //   //       attributes: { exclude: ['password'] },
-    //   //       include: [{ model: Post }],
-    //   //     });
 
 router.get('/dashboard', withAuth, async (req, res) => {
 
@@ -97,15 +86,11 @@ router.get('/dashboard', withAuth, async (req, res) => {
       attributes: { exclude: ['password'] },
     }); 
 
-    const userValues = userData.dataValues
+    const user = userData.dataValues
 
-
-  //  const user = userdata.get({ plain: true })
-    // const user = userData.map((user) => user.get({ plain: true }));
-
-    
-
-    res.render('dashboard', {userValues, logged_in: req.session.logged_in})
+    const userPosts = user.posts.map((post) => post.get({ plain: true }));
+  
+    res.render('dashboard', {user, userPosts, logged_in: req.session.logged_in})
     
   } catch (err) {
   res.status(500).json(err);
@@ -135,6 +120,20 @@ module.exports = router;
 //     res.status(500).json(err);
 //   }
 // });
+
+
+//get request to profile page
+// router.get('/profile', withAuth, async (req, res) => {
+
+//NEEDED withAuth middleware for req.session.user_id to have value. otherwise undefined.
+//no you didn't.  what did you change?
+
+    // const userPosts = postData.map((post) => post.get({ plain: true }));  
+    
+    // const userData = await User.findByPk(req.session.user_id, {
+    //   //       attributes: { exclude: ['password'] },
+    //   //       include: [{ model: Post }],
+    //   //     });
 
 
 
