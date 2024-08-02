@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
-
 //post request that handles signup button login page and found in public/login.js.  request to /api/users
 router.post('/', async (req, res) => {
 
@@ -29,22 +28,26 @@ router.post('/', async (req, res) => {
 
 
 router.post('/login', async (req, res) => {
-  console.log(req.body.username)
+  console.log(req.body)
 
   try {
-    const userData = await User.findOne({ where: { email: req.body.username } })
+    const userData = await User.findOne({ where: { username: req.body.username } })
     
-    
+    if(!userData) {
+      res.status(600).json({ message: "No user data found" });
+      console.log("no user DATA!!!!")
+    }
 
-    // if(!userData) {
-    //   // res.status(600).json({ message: "No user data found" });
-    //   console.log("no user DATA!!!!")
-    //   return;
-    // }
+    const checkPassword = () => {
+      if (userData.dataValues.password === req.body.password) {
+      return true
+      }
+      return false
+    }
 
-    console.log(req.body.password)
+    const validPassword = checkPassword()
 
-    const validPassword = await userData.checkPassword(req.body.password);
+    // const validPassword = await userData.checkPassword(req.body.password);
 
       //NOTE FOR TOMRROW.  HOW TO DO DIFFERENT ALERTS FOR DIFFERENT ERRORS. USERNAME TAKEN OR INVALID PASSWORD (STE THESE IN MODELS)
     if (!validPassword) {
@@ -59,14 +62,14 @@ router.post('/login', async (req, res) => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
 
-      res.json({ user: userData, message: 'You are now logged in!' });
+      res.status(200).json(userData);
     });
 
 
     
   }
   catch (err) {
-    res.status(400).json("hello")
+    res.status(400).json(err)
   }
   
 

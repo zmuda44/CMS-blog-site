@@ -23,20 +23,20 @@
     {{!-- Space holder to take up space that form will occupy. Do not want to use opacity 0 on form to ensure no functionality --}}
     <div class="space-holder"></div>
 
-    {{#each userPosts as |userPost|}}
+    {{!-- {{#each userPosts as |userPost|}}
     <div class="user-posts" id="{{userPost.id}}">      
       <p class="user-post-title" style="background-color: red">{{userPost.title}}</p>
       <p class="user-post-content" style="background-color: red">{{userPost.content}}</p>
       <div class="update-post-form" id="update-post-form">
-        <label for="post-text-{{post.id}}">Title</label>
+        <label for="post-text-{{userPost.id}}">Title</label>
         <input type="text" class="update-post-title" id="update-post-title{{post.id}}">
-        <label for="post-text-{{post.id}}">Content</label>
+        <label for="post-text-{{userPost.id}}">Content</label>
         <input type="text" class="update-post-content" id="update-post-content{{post.id}}">
         <button class="update-post-btn" data-post-id="{{post.id}}">Update</button>
         <button class="delete-post-btn" data-post-id="{{post.id}}">Delete</button>
       </div>
     </div>
-    {{/each}}
+    {{/each}} --}}
     
     {{!-- Hidden until button click --}}
     <form class="post-form">

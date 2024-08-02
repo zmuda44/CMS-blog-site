@@ -7,13 +7,13 @@ const { Post, Comment } = require('../../models');
 
 //there was a withAuth here on this i believe
 router.post('/', async (req, res) => {
-    // console.log(req)
+    console.log("post body")
     try {
       const newPost = await Post.create(req.body)  
       res.status(200).json(newPost);
-      console.log(newPost)
+      // console.log(newPost)
     } catch (err) {
-      console.log(err)
+      // console.log(err)
       res.status(400).json(err);
     }
 });

@@ -26,7 +26,7 @@
         <h3 class="comments-title">Comments</h3>
         {{#each comments as |comment|}}
         <p class="previous-comment">{{comment.content}}</p>
-        <p class="user-comment">-{{comment.user_id}}</p>
+        <p class="user-comment">-{{blog_user.username}}</p>
         {{/each}}
       </div>
       <div class="comment-box" data-post-id="{{post.id}}">

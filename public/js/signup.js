@@ -13,6 +13,8 @@ const signupFormPost= async (event) => {
         body: JSON.stringify({ username, password }),
         headers: { 'Content-Type': 'application/json' },
       });
+
+    
   
       if (response.ok) {
         console.log(response)

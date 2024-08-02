@@ -21,11 +21,11 @@ router.get('/', async (req, res) => {
         ],        
       });  
 
-      const userData = await User.findByPk(req.session.user_id, {
-        attributes: { exclude: ['password'] }
-      })
+      // const userData = await User.findByPk(req.session.user_id, {
+      //   attributes: { exclude: ['password'] }
+      // })
      
-      const user = userData.get({ plain: true });
+      // const user = userData.get({ plain: true });
 
       const posts = postData.map((post) => post.get({ plain: true }));  
       // posts.forEach((post) => {
@@ -37,7 +37,7 @@ router.get('/', async (req, res) => {
 
 
 
-      res.render('homepage', { posts, logged_in: req.session.logged_in, user })
+      res.render('homepage', { posts, logged_in: req.session.logged_in })
       
       // res.render('homepage', { posts, logged_in: req.session.logged_in })
     } catch (err) {
@@ -90,21 +90,22 @@ router.post('/logout', (req, res) => {
     //   //     });
 
 router.get('/dashboard', withAuth, async (req, res) => {
- 
+
   try {
     const userData = await User.findByPk(req.session.user_id, {
       include: [{ model: Post }],
       attributes: { exclude: ['password'] },
-    });
+    }); 
+
+    const userValues = userData.dataValues
 
 
-    console.log(userData)
+  //  const user = userdata.get({ plain: true })
+    // const user = userData.map((user) => user.get({ plain: true }));
 
-    const userPostsData = userData.dataValues.posts
+    
 
-    const userPosts = userPostsData.map((post) => post.get({ plain: true }));
-
-    res.render('dashboard', { userPosts, logged_in: req.session.logged_in })
+    res.render('dashboard', {userValues, logged_in: req.session.logged_in})
     
   } catch (err) {
   res.status(500).json(err);
