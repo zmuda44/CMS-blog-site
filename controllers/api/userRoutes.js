@@ -31,7 +31,7 @@ router.post('/login', async (req, res) => {
   console.log(req.body)
 
   try {
-    const userData = await User.findOne({ where: { username: req.body.username } })
+    const userData = await User.findOne({ where: { username: req.body.username }})
     
     if(!userData) {
       res.status(600).json({ message: "No user data found" });
@@ -53,7 +53,7 @@ router.post('/login', async (req, res) => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
 
-      res.status(200).json(userData);
+      res.status(200).json(userData.username);
     });
     
   }

@@ -10,13 +10,11 @@ function displayCommentBox () {
 }
 
 const submitComment = async (content, post_id, user_id) => {
-  console.log(user_id)
-
-    if (content && post_id) {
-
+  if (content && post_id) {
+        // if (user_id)
         const response = await fetch('/api/posts/comment', {
           method: 'POST',
-          body: JSON.stringify({ content, post_id, user_id }),
+          body: JSON.stringify({ content, post_id, user_id, }),
           // body: JSON.stringify({ commentText, req.session.id }),
           headers: { 'Content-Type': 'application/json' },
         });
