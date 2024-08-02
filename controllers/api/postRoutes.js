@@ -1,22 +1,36 @@
 const router = require('express').Router();
-const { Post } = require('../../models');
+const { Post, Comment } = require('../../models');
+
 
 //main question.  where do all of the res.status(200).json's go???
 
 
 //there was a withAuth here on this i believe
 router.post('/', async (req, res) => {
-    console.log(req.body)
+    console.log("post body")
     try {
-      const newPost = await Post.create(req.body)
-
-      console.log(newPost)
-  
+      const newPost = await Post.create(req.body)  
       res.status(200).json(newPost);
+      // console.log(newPost)
     } catch (err) {
+      // console.log(err)
       res.status(400).json(err);
     }
 });
+
+router.post('/comment', async (req, res) => {
+  console.log(req.body)
+  try {
+    const newComment = await Comment.create(req.body);
+    res.status(200).json(newComment);
+
+  }
+
+  catch(err) {
+    res.status(400).json(err)
+  }
+}
+)
 
 module.exports = router;
 

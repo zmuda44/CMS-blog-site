@@ -5,6 +5,7 @@ const withAuth = require('../utils/auth');
 
 // get request to homepage
 router.get('/', async (req, res) => {
+
     try {
       // Get all projects and JOIN with user data
       const postData = await Post.findAll({
@@ -13,12 +14,32 @@ router.get('/', async (req, res) => {
             model: User,
             attributes: ['username'],
           },
+          {
+            model: Comment,
+            attributes: ['content', 'user_id']
+          }
         ],        
-      }); 
-    
+      });  
+
+      // const userData = await User.findByPk(req.session.user_id, {
+      //   attributes: { exclude: ['password'] }
+      // })
+     
+      // const user = userData.get({ plain: true });
+
       const posts = postData.map((post) => post.get({ plain: true }));  
+      // posts.forEach((post) => {
+      //   console.log(post.comments)
+      // })
       
+      
+      // res.send(posts)
+
+
+
       res.render('homepage', { posts, logged_in: req.session.logged_in })
+      
+      // res.render('homepage', { posts, logged_in: req.session.logged_in })
     } catch (err) {
       res.status(500).json(err);
     }
@@ -43,6 +64,16 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+router.post('/logout', (req, res) => {
+  if (req.session.logged_in) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
+  }
+});
+
 
 
 //get request to profile page
@@ -51,13 +82,30 @@ router.get('/login', (req, res) => {
 //NEEDED withAuth middleware for req.session.user_id to have value. otherwise undefined.
 //no you didn't.  what did you change?
 
-router.get('/dashboard', async (req, res) => {
+    // const userPosts = postData.map((post) => post.get({ plain: true }));  
+    
+    // const userData = await User.findByPk(req.session.user_id, {
+    //   //       attributes: { exclude: ['password'] },
+    //   //       include: [{ model: Post }],
+    //   //     });
+
+router.get('/dashboard', withAuth, async (req, res) => {
+
   try {
-    const postData = await Post.findByPk
+    const userData = await User.findByPk(req.session.user_id, {
+      include: [{ model: Post }],
+      attributes: { exclude: ['password'] },
+    }); 
+
+    const userValues = userData.dataValues
 
 
-    res.render('dashboard');
+  //  const user = userdata.get({ plain: true })
+    // const user = userData.map((user) => user.get({ plain: true }));
 
+    
+
+    res.render('dashboard', {userValues, logged_in: req.session.logged_in})
     
   } catch (err) {
   res.status(500).json(err);

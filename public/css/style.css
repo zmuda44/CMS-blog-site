@@ -63,7 +63,7 @@ header a {
     margin: 0 10px;
 }
 
-.card .comment-box {
+.card .comments {
     display: none;
 }
 
@@ -128,6 +128,9 @@ header a {
     margin: auto;
 }
 
+.update-post-form {
+    display: none;
+}
 
 
 

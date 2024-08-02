@@ -1,3 +1,18 @@
+const userPostEl = document.getElementsByClassName('user-posts')
+
+// const updatePostForm = document.getElementsByClassName('.update-post-form')
+const postForm = document.querySelector('.post-form')
+
+
+function showUpdateForm() {
+  
+    const postUpdateFormEl = this.querySelector('.update-post-form')
+    postUpdateFormEl.style.display = "block";
+    console.log(postUpdateFormEl)
+    document.querySelector('.space-holder').style.display = "none"
+}
+
+
 function showForm () {
   postForm.style.display = "block";
   document.querySelector('.space-holder').style.display = "none"
@@ -8,7 +23,7 @@ async function newPost (e) {
     
     const title = document.getElementById("title").value.trim();
     const content = document.getElementById("content").value.trim();
-    const user_id = 1;
+    const user_id = 8;
 
     if (title && content && user_id) {
         // console.log('has both!!!')
@@ -28,14 +43,15 @@ async function newPost (e) {
 };
 
 
-
-
-
-
-
-
-
-const postForm = document.querySelector('.post-form')
 postForm.addEventListener('submit', newPost);
 
-document.querySelector('.new-post-show').addEventListener('click', showForm)
+for (post of userPostEl) {
+  // const postID = post.id
+  console.log(postId)
+  post.addEventListener('click', showUpdateForm)
+
+  // const postUpdateForm = post.getElementById('')
+}
+
+document.querySelector('.new-post-btn').addEventListener('click', showForm)
+// document.querySelector('.update-post-form').addEventListener('click', showUpdateForm)

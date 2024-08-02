@@ -5,7 +5,7 @@
     <div class="box">The Tech Blog</div>
   </div>
 </div>
-
+<p id="user-welcome" data-user-id="{{user.id}}">{{user.username}}</p>
 <div class="all-posts">
   <div class="container">
   {{#if posts.length}}
@@ -14,15 +14,29 @@
   <div class="card" id="{{post.id}}">
     <div class="title">
       <h2> {{post.title}} </h2>
-      <p> Posted by {{ blog_user.name }} on {{ date }} </p>
+      <p> Posted by {{ blog_user.username }}</p>
+      <p>{{post.id}}</p>
+      {{!-- on {{ date }} --}}
     </div>
     <div class="content">
       <p> {{post.content}} </p>
     </div>
-    <div class="comment-box" value="{{post.id}}">
-      <label for="comment-text">Comment</label>
-      <input type="text" class="" id="comment-text">
+    <div class="comments">
+      <div class="previous-comments">
+        <h3 class="comments-title">Comments</h3>
+        {{#each comments as |comment|}}
+        <p class="previous-comment">{{comment.content}}</p>
+        <p class="user-comment">-{{blog_user.username}}</p>
+        {{/each}}
+      </div>
+      <div class="comment-box" data-post-id="{{post.id}}">
+
+        <label for="comment-text-{{post.id}}">Comment</label>
+        <input type="text" class="comment-content" id="comment-input-post{{post.id}}">
+        <button class="comment-btn" data-post-id="{{post.id}}">submit</button>
+      </div>
     </div>
+    
   </div>
   {{/each}}
 
