@@ -1,5 +1,5 @@
 {{#if logged_in}}
-<div class="title-box">
+<div class="title-box" id="user-id" user-id="{{user.id}}">
   <div class="container">
     <div class="box">Your Dashboard</div>
   </div>
@@ -25,15 +25,15 @@
 
     {{#each userPosts as |userPost|}}
     <div class="user-posts" id="{{userPost.id}}">      
-      <p class="user-post-title" style="background-color: red">{{userPost.title}}</p>
+      <p class="user-post-title" style="border: solid">{{userPost.title}}</p>
       {{!-- <p class="user-post-content" style="background-color: red">{{userPost.content}}</p> --}}
       <div class="update-post-form" id="update-post-form">
         <label for="post-text-{{userPost.id}}">Title</label>
-        <input type="text" class="update-post-title" id="update-post-title{{post.id}}">
+        <input type="text" value="{{userPost.title}}" class="update-post-title" id="update-post-title{{post.id}}">
         <label for="post-text-{{userPost.id}}">Content</label>
-        <input type="text" class="update-post-content" id="update-post-content{{post.id}}">
-        <button class="update-post-btn" data-post-id="{{post.id}}">Update</button>
-        <button class="delete-post-btn" data-post-id="{{post.id}}">Delete</button>
+        <input type="text" value="{{userPost.content}}" class="update-post-content" id="update-post-content{{post.id}}">
+        <button class="update-post-btn" post-id="{{userPost.id}}">Update</button>
+        <button class="delete-post-btn" post-id="{{userPost.id}}">Delete</button>
       </div>
     </div>
     {{/each}}

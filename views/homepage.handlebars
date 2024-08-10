@@ -1,4 +1,4 @@
-
+<p>this is blog {{ blog_user.username }}</p>
 
 <div class="title-box">
   <div class="container">
@@ -26,7 +26,11 @@
         <h3 class="comments-title">Comments</h3>
         {{#each comments as |comment|}}
         <p class="previous-comment">{{comment.content}}</p>
+        {{#if blog_user.username}}
         <p class="user-comment">-{{blog_user.username}}</p>
+        {{else}}
+        <p class="user-comment">-anonymous</p>
+        {{/if}}
         {{/each}}
       </div>
       <div class="comment-box" data-post-id="{{post.id}}">

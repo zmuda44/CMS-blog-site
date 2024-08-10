@@ -1,15 +1,63 @@
-const userPostEl = document.getElementsByClassName('user-posts')
-
+const userPostEls = document.getElementsByClassName('user-posts')
+const titleEl = document.getElementById('user-id')
+console.log(titleEl)
 // const updatePostForm = document.getElementsByClassName('.update-post-form')
 const postForm = document.querySelector('.post-form')
 
+const updatePostTitle = document.querySelector('.update-post-title')
+const updatePostContent = document.querySelector('.update-post-content')
+const updatePostBtn = document.querySelector('.update-post-btn')
+const deletePostBtn = document.querySelector('.delete-post-btn')
 
 function showUpdateForm() {
-  
+
     const postUpdateFormEl = this.querySelector('.update-post-form')
     postUpdateFormEl.style.display = "block";
-    console.log(postUpdateFormEl)
+
     document.querySelector('.space-holder').style.display = "none"
+}
+
+async function updatePost (e) {
+  const title = updatePostTitle.value.trim();
+  const content = updatePostContent.value.trim();
+
+  const user_id = titleEl.getAttribute('user-id')
+  const postId = this.getAttribute('post-id') 
+
+  if (title && content && user_id) {
+
+    const response = await fetch(`/api/posts/${postId}`, {
+      method: 'PUT',
+      body: JSON.stringify({ title, content, user_id }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+      // If successful, redirect the browser to the profile page
+      document.location.replace('/dashboard');
+    } else {
+      alert(response.statusText);
+    }
+}
+
+}
+
+async function deletePost () {
+  const postId = this.getAttribute('post-id')
+
+  if (postId) {
+
+    const response = await fetch(`/api/posts/${postId}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      // If successful, redirect the browser to the profile page
+      document.location.replace('/dashboard');
+    } else {
+      alert(response.statusText);
+    }
+}
 }
 
 
@@ -35,23 +83,30 @@ async function newPost (e) {
     
         if (response.ok) {
           // If successful, redirect the browser to the profile page
+          // updatePostBtn.addEventListener('click', updatePost);
+          // deletePostBtn.addEventListener('click', deletePost);
           document.location.replace('/dashboard');
         } else {
           alert(response.statusText);
         }
     }
+
+
 };
 
 
 postForm.addEventListener('submit', newPost);
 
-for (post of userPostEl) {
+for (post of userPostEls) {
   // const postID = post.id
-  console.log(postId)
   post.addEventListener('click', showUpdateForm)
-
-  // const postUpdateForm = post.getElementById('')
 }
 
 document.querySelector('.new-post-btn').addEventListener('click', showForm)
-// document.querySelector('.update-post-form').addEventListener('click', showUpdateForm)
+
+console.log(userPostEls)
+if (userPostEls.length !== 0) {
+  updatePostBtn.addEventListener('click', updatePost);
+  deletePostBtn.addEventListener('click', deletePost);
+}
+
