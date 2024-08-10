@@ -1,4 +1,4 @@
-const userPostEl = document.getElementsByClassName('user-posts')
+const userPostEls = document.getElementsByClassName('user-posts')
 const titleEl = document.getElementById('user-id')
 console.log(titleEl)
 // const updatePostForm = document.getElementsByClassName('.update-post-form')
@@ -42,8 +42,22 @@ async function updatePost (e) {
 
 }
 
-function deletePost () {
-  console.log('delete post')
+async function deletePost () {
+  const postId = this.getAttribute('post-id')
+
+  if (postId) {
+
+    const response = await fetch(`/api/posts/${postId}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      // If successful, redirect the browser to the profile page
+      document.location.replace('/dashboard');
+    } else {
+      alert(response.statusText);
+    }
+}
 }
 
 
@@ -69,22 +83,30 @@ async function newPost (e) {
     
         if (response.ok) {
           // If successful, redirect the browser to the profile page
+          // updatePostBtn.addEventListener('click', updatePost);
+          // deletePostBtn.addEventListener('click', deletePost);
           document.location.replace('/dashboard');
         } else {
           alert(response.statusText);
         }
     }
+
+
 };
 
 
 postForm.addEventListener('submit', newPost);
 
-for (post of userPostEl) {
+for (post of userPostEls) {
   // const postID = post.id
   post.addEventListener('click', showUpdateForm)
 }
 
 document.querySelector('.new-post-btn').addEventListener('click', showForm)
 
-updatePostBtn.addEventListener('click', updatePost);
-deletePostBtn.addEventListener('click', deletePost);
+console.log(userPostEls)
+if (userPostEls.length !== 0) {
+  updatePostBtn.addEventListener('click', updatePost);
+  deletePostBtn.addEventListener('click', deletePost);
+}
+
