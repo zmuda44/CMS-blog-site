@@ -1,17 +1,21 @@
 const router = require('express').Router();
 const { Post, Comment } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 
 //main question.  where do all of the res.status(200).json's go???
 
 
 //there was a withAuth here on this i believe
-router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
 
     try {
-      const newPost = await Post.create(req.body) 
-      res.status(200).json(newPost);
+      const newPost = await Post.create({
+        ...req.body,
+      user_id: req.session.user_id,
+      }); 
 
+      res.status(200).json(newPost);
     } catch (err) {
       // console.log(err)
       res.status(400).json(err);
@@ -41,7 +45,7 @@ router.post('/comment', async (req, res) => {
 }
 )
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', withAuth, async (req, res) => {
   console.log(req.params.id) 
   console.log(req.body)
   try {
@@ -71,7 +75,7 @@ router.put('/:id', async (req, res) => {
 })
 
 // had withAuth
-  router.delete('/:id', async (req, res) => {
+  router.delete('/:id', withAuth, async (req, res) => {
     console.log(req.params.id)
     try {
       const post = await Post.destroy({
@@ -93,26 +97,3 @@ router.put('/:id', async (req, res) => {
 
 module.exports = router;
 
-
-
-//handles delete button on page________
-  
-//   router.delete('/:id', withAuth, async (req, res) => {
-//     try {
-//       const projectData = await Project.destroy({
-//         where: {
-//           id: req.params.id,
-//           user_id: req.session.user_id,
-//         },
-//       });
-  
-//       if (!projectData) {
-//         res.status(404).json({ message: 'No project found with this id!' });
-//         return;
-//       }
-  
-//       res.status(200).json(projectData);
-//     } catch (err) {
-//       res.status(500).json(err);
-//     }
-//   });

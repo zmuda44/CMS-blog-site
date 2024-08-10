@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+// const bcrypt = require('bcryptjs');
 
 //post request that handles signup button login page and found in public/login.js.  request to /api/users
 router.post('/', async (req, res) => {

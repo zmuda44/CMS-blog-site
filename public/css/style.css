@@ -132,5 +132,13 @@ header a {
     display: none;
 }
 
+.title-bar  {
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+    background-color: green;
+    border-radius: 10px;
+}
+
 
 
