@@ -19,15 +19,11 @@ const loginFormPost = async (event) => {
     if (response.ok) {
       // If successful, redirect the browser to the profile page
       document.location.replace('/dashboard');
-    } else if (response.status == "No user name found in database") {
-      alert("No user name found");
+    } else {
+      alert('Failed to log in');  
     }
   }
 };
-
-// document
-//   .querySelector('.login-form')
-//   .addEventListener('submit', loginFormPost);
 
 document.querySelector('.login-form-submit').addEventListener("click", loginFormPost)
 
