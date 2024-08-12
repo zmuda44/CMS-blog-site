@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
 
-    // //does the response have the req.session attached? No, appears to be only the 3 data fields
+    //does the response have the req.session attached? No, appears to be only the 3 data fields
       res.status(200).json(userData)
     })
 
@@ -22,10 +22,6 @@ router.post('/', async (req, res) => {
     res.status(400).json(err)
   }
 });
-
-
-//post request that handles login button on login page and found in public/login.js. request to api/users/login
-//notice the check password to the beginning of user model
 
 
 router.post('/login', async (req, res) => {
@@ -41,7 +37,6 @@ router.post('/login', async (req, res) => {
 
     const validPassword = await userData.checkPassword(req.body.password);
 
-      //NOTE FOR TOMRROW.  HOW TO DO DIFFERENT ALERTS FOR DIFFERENT ERRORS. USERNAME TAKEN OR INVALID PASSWORD (STE THESE IN MODELS)
     if (!validPassword) {
       console.log("no valid password")
       res
@@ -86,5 +81,5 @@ module.exports = router;
 
 
 
-  //haven't made this request yet
+
 

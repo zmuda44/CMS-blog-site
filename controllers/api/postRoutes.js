@@ -2,11 +2,6 @@ const router = require('express').Router();
 const { Post, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-
-//main question.  where do all of the res.status(200).json's go???
-
-
-//there was a withAuth here on this i believe
 router.post('/', withAuth, async (req, res) => {
 
     try {
@@ -74,7 +69,6 @@ router.put('/:id', withAuth, async (req, res) => {
   }
 })
 
-// had withAuth
   router.delete('/:id', withAuth, async (req, res) => {
     console.log(req.params.id)
     try {

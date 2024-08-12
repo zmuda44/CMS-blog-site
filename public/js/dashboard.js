@@ -1,7 +1,5 @@
 const userPostEls = document.getElementsByClassName('user-posts')
 const titleEl = document.getElementById('user-id')
-console.log(titleEl)
-// const updatePostForm = document.getElementsByClassName('.update-post-form')
 const postForm = document.querySelector('.post-form')
 
 const updatePostTitle = document.querySelector('.update-post-title')
@@ -33,7 +31,7 @@ async function updatePost (e) {
     });
 
     if (response.ok) {
-      // If successful, redirect the browser to the profile page
+
       document.location.replace('/dashboard');
     } else {
       alert(response.statusText);
@@ -52,7 +50,7 @@ async function deletePost () {
     });
 
     if (response.ok) {
-      // If successful, redirect the browser to the profile page
+
       document.location.replace('/dashboard');
     } else {
       alert(response.statusText);
@@ -82,9 +80,7 @@ async function newPost (e) {
         });
     
         if (response.ok) {
-          // If successful, redirect the browser to the profile page
-          // updatePostBtn.addEventListener('click', updatePost);
-          // deletePostBtn.addEventListener('click', deletePost);
+
           document.location.replace('/dashboard');
         } else {
           alert(response.statusText);
@@ -98,7 +94,7 @@ async function newPost (e) {
 postForm.addEventListener('submit', newPost);
 
 for (post of userPostEls) {
-  // const postID = post.id
+
   post.addEventListener('click', showUpdateForm)
 }
 

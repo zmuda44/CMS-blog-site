@@ -3,8 +3,6 @@ const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
 
-//checkpassword is called in the post route to user/api/login on userRoutes.js
-//the hooks will run before any create or update (where are updates. craeate is in post request to /api/user )
 
 class blogUser extends Model {
   checkPassword(loginPw) {

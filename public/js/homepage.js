@@ -11,16 +11,16 @@ function displayCommentBox () {
 
 const submitComment = async (content, post_id, user_id) => {
   if (content && post_id) {
-        // if (user_id)
+
         const response = await fetch('/api/posts/comment', {
           method: 'POST',
           body: JSON.stringify({ content, post_id, user_id, }),
-          // body: JSON.stringify({ commentText, req.session.id }),
+
           headers: { 'Content-Type': 'application/json' },
         });
     
         if (response.ok) {
-          // If successful, redirect the browser to the profile page
+
           document.location.replace('/');
         } else {
           alert(response.statusText);
@@ -39,13 +39,10 @@ const loginFormPost = async (event) => {
     const username = document.getElementById('username-login').value.trim();
     const password = document.getElementById('password-login').value.trim();
     
-  
-    // console.log(email)
-    // console.log(password)
-  
+ 
     
     if (username && password) {
-      // console.log('has both!!!')
+
       const response = await fetch('/api/users/login', {
         method: 'POST',
         body: JSON.stringify({ username, password }),
@@ -53,7 +50,7 @@ const loginFormPost = async (event) => {
       });
   
       if (response.ok) {
-        // If successful, redirect the browser to the profile page
+
         document.location.replace('/profile');
       } else {
         alert(response.statusText);

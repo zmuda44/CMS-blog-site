@@ -26,18 +26,6 @@ const signupFormPost= async (event) => {
     }
   };
 
-
-
-
-
-
-
-
-
-
-
-
-
 document
   .querySelector('.signup-form')
   .addEventListener('submit', signupFormPost);
