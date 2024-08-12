@@ -13,26 +13,23 @@
     <div class="title">
       <h2> {{post.title}} </h2>
       <p> Posted by {{ blog_user.username }} on {{format_date post.date_created}}</p>
-{{!-- {{format_date date_created}} --}}
-
     </div>
     <div class="content">
       <p> {{post.content}} </p>
     </div>
     <div class="comments">
-      <div class="previous-comments">
-        <h3 class="comments-title">Comments</h3>
-        {{#each comments as |comment|}}
-        <p class="previous-comment">{{comment.content}}</p>
-        {{#if blog_user.username}}
-        <p class="user-comment">-{{blog_user.username}}, {{format_date comment.date_created}}</p>
-        {{else}}
-        <p class="user-comment">-anonymous, {{format_date comment.date_created}}</p>
-        {{/if}}
-        {{/each}}
-      </div>
-      <div class="comment-box" data-post-id="{{post.id}}">
+      {{#each comments as |comment|}}
+        <div class="comment">
+          <p class="comment-content">{{comment.content}}</p>
+          {{#if blog_user.username}}
+          <p class="user-comment">-{{blog_user.username}}, {{format_date comment.date_created}}</p>
+          {{else}}
+          <p class="user-comment">-anonymous, {{format_date comment.date_created}}</p>
+          {{/if}}
+        </div>
+      {{/each}}
 
+      <div class="comment-box" data-post-id="{{post.id}}">
         <label for="comment-text-{{post.id}}">Comment</label>
         <input type="text" class="comment-content" id="comment-input-post{{post.id}}">
         <button class="comment-btn" data-post-id="{{post.id}}">submit</button>

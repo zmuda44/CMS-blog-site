@@ -1,6 +1,4 @@
 const cardsEl = document.getElementsByClassName('card')
-// const commentBoxEl = document.getElementsByClassName('.comment-box')
-// const commentContentEl = document.getElementsByClassName('comment-text')
 const commentBtnEl = document.getElementsByClassName('comment-btn')
 
 function displayCommentBox () {

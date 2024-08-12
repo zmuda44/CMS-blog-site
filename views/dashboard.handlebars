@@ -17,27 +17,35 @@
 
 <div class="new-post-section">
   <div class="container">
-    {{!-- Space holder to take up space that form will occupy. Do not want to use opacity 0 on form to ensure no functionality --}}
-    <div class="space-holder"></div>
-
+{{!-- Space holder to take up space that form or previous posts will occupy to look like the challenge image --}}
+    
+    
+  
+    {{#if userPosts.length}}
     {{#each userPosts as |userPost|}}
     <div class="user-posts" id="{{userPost.id}}"> 
-      <div class="title-bar">
+      <div class="post-title-bar">
         <p class="user-post-title">{{userPost.title}}</p>
         <p class="user-post-date">{{format_date userPost.date_created}}</p>
-      </div>     
-      
-
+      </div>
       <div class="update-post-form" id="update-post-form">
-        <label for="post-text-{{userPost.id}}">Title</label>
-        <input type="text" value="{{userPost.title}}" class="update-post-title" id="update-post-title{{post.id}}">
-        <label for="post-text-{{userPost.id}}">Content</label>
-        <input type="text" value="{{userPost.content}}" class="update-post-content" id="update-post-content{{post.id}}">
-        <button class="update-post-btn" post-id="{{userPost.id}}">Update</button>
-        <button class="delete-post-btn" post-id="{{userPost.id}}">Delete</button>
+        <h2>Edit Post</h2>
+          <div class="form-group">
+            <label for="post-text-{{userPost.id}}">Title</label>
+            <input type="text" value="{{userPost.title}}" class="update-post-title" id="update-post-title{{post.id}}">
+          </div>
+          <div class="form-group">
+            <label for="post-text-{{userPost.id}}">Content</label>
+            <input type="text" value="{{userPost.content}}" class="update-post-content" id="update-post-content{{post.id}}">
+          </div>
+        <button class="update-post-btn" post-id="{{userPost.id}}">Update Post</button>
+        <button class="delete-post-btn" post-id="{{userPost.id}}">Delete Post</button>
       </div>
     </div>
+    {{else}}
+    <div class="space-holder"></div>   
     {{/each}}
+    {{/if}}
     
     {{!-- Hidden until button click --}}
     <form class="post-form" id="{{user.id}}">
@@ -54,7 +62,7 @@
         <button class="" type="submit">Create</button>
       </div>
     </form>
-    <button class="new-post-btn">New Post</button>
+    <button class="new-post-btn">New Post</button>    
   </div>
 </div>
 

@@ -63,15 +63,41 @@ header a {
     margin: 0 10px;
 }
 
-.card .comments {
+.comments {
     display: none;
+    margin: 2px;
 }
+
+.comment {
+    border: solid;
+    margin: 10px;
+    padding: 5px;
+}
+
+.comments h3 {
+    background-color: black;
+    color: white;
+}
+
+.comment-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: solid;
+    margin: 10px;
+    padding: 5px; 
+}
+
+.comment-box input {
+    height: 50px;
+}
+
 
 /* Begin Login Screen */
 
 .login-section .container {
     border: solid;
-    margin-top: 10px;    
+    margin-top: 10px;   
 }
 
 .login-section h2 {
@@ -114,31 +140,80 @@ header a {
     display: block;
     height: 400px;
     width: 100%;
-    /* background-color: red; */
+}
+
+.new-post-section .container {
+    text-align: center;
+}
+
+.new-post-btn {
+    margin: 10px 0;
+    width: 200px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: black;
+    color: white;
 }
 
 .post-form {
     display: none;
+    border: solid;
+    margin: 10px;
+    text-align: left;
 }
 
-.new-post-show {
+.post-form h2 {
     background-color: black;
     color: white;
-    padding: 5px;
-    margin: auto;
+    padding-left: 10px;
+}
+
+.user-posts {
+    margin-top: 20px;
+}
+
+.post-title-bar  {
+    display: flex;   
+    justify-content: space-between;
+    padding: 0 20px;
+    align-items: center;  
+    background-color: black;
+    color: white;
+    border-radius: 10px;
 }
 
 .update-post-form {
     display: none;
+    margin-top: 10px;
+    text-align: left;
+    border: solid;
+    padding: 10px;
 }
 
-.title-bar  {
-    display: flex;
-    align-items: center;
-    justify-content: center;  
-    background-color: green;
-    border-radius: 10px;
+.update-post-form label {
+    display: block;
 }
+
+.update-post-form input {
+    display: block;
+}
+
+.update-post-form h2 {
+    background-color: black;
+    color: white;
+    padding-left: 10px;
+}
+
+.update-post-form input {
+    width: 100%;
+}
+
+.update-post-btn, .delete-post-btn {
+    display: block;
+    width: 100%;
+    margin-top: 3px;
+}
+
 
 
 
