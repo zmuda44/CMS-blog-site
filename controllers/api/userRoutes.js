@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { blogUser } = require('../../models');
 // const bcrypt = require('bcryptjs');
 
 //post request that handles signup button login page and found in public/login.js.  request to /api/users
@@ -7,7 +7,7 @@ router.post('/', async (req, res) => {
 
  
   try {
-    const userData = await User.create(req.body)
+    const userData = await blogUser.create(req.body)
 
     req.session.save(() => {
       //the data coming back out of the server will have a user id. set it equal to req.session.user_id)
@@ -28,7 +28,7 @@ router.post('/login', async (req, res) => {
   console.log(req.body)
 
   try {
-    const userData = await User.findOne({ where: { username: req.body.username }})
+    const userData = await blogUser.findOne({ where: { username: req.body.username }})
     
     if(!userData) {
       res.status(600).json({ message: "No user data found" });
