@@ -1,34 +1,33 @@
 const router = require('express').Router();
-const { User, Post, Comment } = require('../models');
+const { blogUser, Post, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 
 // get request to homepage
 router.get('/', async (req, res) => {
+ 
 
     try {
       // Get all projects and JOIN with user data
       const postData = await Post.findAll({
         include: [
           {
-            model: User,
+            model: blogUser,
             attributes: ['username'],
           },
           {
             model: Comment,
             include: [
-              {model: User,
+              {model: blogUser,
                 attributes: ['username']
               }
             ],
             attributes: ['content', 'user_id', 'date_created']
           }
         ],        
-      });       
+      });    
 
       const posts = postData.map((post) => post.get({ plain: true }));
-
-      console.log(posts)
 
       res.render('homepage', { posts, logged_in: req.session.logged_in })     
      
@@ -37,8 +36,6 @@ router.get('/', async (req, res) => {
     }
   });
 
-
-  //missing get request to post/:id
 
 router.get('/signup', (req, res) => {
   res.render('signup')
@@ -63,7 +60,7 @@ router.post('/logout', (req, res) => {
 router.get('/dashboard', withAuth, async (req, res) => {
   
   try {
-    const userData = await User.findByPk(req.session.user_id, {
+    const userData = await blogUser.findByPk(req.session.user_id, {
       include: [{ model: Post }],
       attributes: { exclude: ['password'] },
     }); 
